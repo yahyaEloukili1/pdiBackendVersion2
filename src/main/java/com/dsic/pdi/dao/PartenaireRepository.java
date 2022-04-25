@@ -10,23 +10,20 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import com.dsic.pdi.entities.Axe;
 import com.dsic.pdi.entities.Commune;
+import com.dsic.pdi.entities.Partenaire;
 import com.dsic.pdi.entities.Province;
-import com.dsic.pdi.entities.ProvincePrejection;
-import com.dsic.pdi.entities.ProvincePrejectionId;
+import com.dsic.pdi.entities.Secteur;
 import com.dsic.pdi.entities.Statut;
-import com.dsic.pdi.entities.StatutPrejection;
-import com.dsic.pdi.entities.StatutPrejectionId;
 
 @CrossOrigin(origins = "*")
 @RepositoryRestResource
-public interface StatutRepository extends JpaRepository<Statut, Integer> {
+public interface PartenaireRepository extends JpaRepository<Partenaire, Integer> {
 
-	@RestResource(path= "/byStatut")
-	public List<Statut> findByStatutContainsIgnoreCase(@Param("mc") String pr);
+	@RestResource(path= "/byPartenaire")
+	public List<Partenaire> findByPartenaireContainsIgnoreCase(@Param("mc") String pr);
 	
-	@RestResource(path= "/byStatutPage")
-	public Page<Statut> findByStatutContainsIgnoreCase(@Param("mc") String pr,Pageable peaPageable);
-	public List<StatutPrejection> findAllByOrderById();
-	public List<StatutPrejectionId> findBy();
+	@RestResource(path= "/byPartenairePage")
+	public Page<Partenaire> findByPartenaireContainsIgnoreCase(@Param("mc") String pr,Pageable peaPageable);
 }

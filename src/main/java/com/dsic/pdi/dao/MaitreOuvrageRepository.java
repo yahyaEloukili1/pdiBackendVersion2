@@ -23,5 +23,5 @@ public interface MaitreOuvrageRepository extends JpaRepository<MaitreOuvrage, In
 	public List<MaitreOuvrage> findByMaitreOuvrageContainsIgnoreCase(@Param("mc") String pr);
 	
 	@RestResource(path= "/byMaitreOuvragePage")
-	public Page<MaitreOuvrage> findByMaitreOuvrageIgnoreCase(@Param("mc") String pr,Pageable peaPageable);
+	public Page<MaitreOuvrage> findByMaitreOuvrageContainsIgnoreCase(@Param("mc") String pr,Pageable peaPageable);
 }

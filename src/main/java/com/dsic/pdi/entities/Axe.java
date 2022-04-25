@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -12,16 +13,16 @@ import javax.persistence.OneToMany;
 public class Axe {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	private String axe;
 	private String axe_ar;
-	@OneToMany(mappedBy = "axe",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "axe")
 	private Collection<Secteur> secteurs;
 	
-	@OneToMany(mappedBy = "projet",cascade = CascadeType.ALL)
-	private Collection<Projet> projet;
+	@OneToMany(mappedBy = "axe")
+	private Collection<Projet> projets;
 	
 	public Axe(String axe, String axe_ar) {
 		super();
@@ -51,6 +52,22 @@ public class Axe {
 	}
 	public void setAxe_ar(String axe_ar) {
 		this.axe_ar = axe_ar;
+	}
+
+	public Collection<Secteur> getSecteurs() {
+		return secteurs;
+	}
+
+	public void setSecteurs(Collection<Secteur> secteurs) {
+		this.secteurs = secteurs;
+	}
+
+	public Collection<Projet> getProjet() {
+		return projets;
+	}
+
+	public void setProjet(Collection<Projet> projet) {
+		this.projets = projet;
 	}
 	
 	

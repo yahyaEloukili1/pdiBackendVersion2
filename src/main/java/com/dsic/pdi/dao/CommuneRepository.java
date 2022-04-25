@@ -11,7 +11,11 @@ import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.dsic.pdi.entities.Commune;
+import com.dsic.pdi.entities.CommunePrejection;
+import com.dsic.pdi.entities.CommunePrejectionId;
+import com.dsic.pdi.entities.Projet;
 import com.dsic.pdi.entities.Province;
+import com.dsic.pdi.entities.ProvincePrejection;
 
 @CrossOrigin(origins = "*")
 @RepositoryRestResource
@@ -22,4 +26,8 @@ public interface CommuneRepository extends JpaRepository<Commune, Integer> {
 	
 	@RestResource(path= "/byCommunePage")
 	public Page<Commune> findByCommuneContainsIgnoreCase(@Param("mc") String pr,Pageable peaPageable);
+	
+
+	public List<CommunePrejection> findAllByOrderById();
+	public List<CommunePrejectionId> findBy();
 }

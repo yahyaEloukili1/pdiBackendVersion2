@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -12,13 +13,13 @@ import javax.persistence.OneToMany;
 public class MaitreOuvrage {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String maitreOuvrage;
 	private String maitreOuvrage_ar;
 	
-	@OneToMany(mappedBy = "projet",cascade = CascadeType.ALL)
-	private Collection<Projet> projet;
+	@OneToMany(mappedBy = "maitreOuvrage",cascade = CascadeType.ALL)
+	private Collection<Projet> projets;
 	public MaitreOuvrage(String maitreOuvrage, String maitreOuvrage_ar) {
 		super();
 		this.maitreOuvrage = maitreOuvrage;
@@ -45,6 +46,12 @@ public class MaitreOuvrage {
 	}
 	public void setMaitreOuvrage_ar(String maitreOuvrage_ar) {
 		this.maitreOuvrage_ar = maitreOuvrage_ar;
+	}
+	public Collection<Projet> getProjets() {
+		return projets;
+	}
+	public void setProjets(Collection<Projet> projets) {
+		this.projets = projets;
 	}
 	
 	

@@ -1,15 +1,19 @@
 package com.dsic.pdi.entities;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.lang.Nullable;
 
 
@@ -18,18 +22,18 @@ import org.springframework.lang.Nullable;
 public class Commune {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	private String commune;
 	private String commune_ar;
 	
-	@ManyToOne
+	@ManyToOne()
 	 @JoinColumn(name="province_id")
 	private Province province;
 	
-	@OneToMany(mappedBy = "projet",cascade = CascadeType.ALL)
-	private Collection<Projet> projet;
+	@OneToMany(mappedBy = "commune",cascade = CascadeType.ALL)
+	private List<Projet> projets;
 
 	
 	public Commune() {
@@ -83,6 +87,18 @@ public class Commune {
 	public void setProvince(Province province) {
 		this.province = province;
 	}
+
+
+	public List<Projet> getProjets() {
+		return projets;
+	}
+
+
+	public void setProjets(List<Projet> projets) {
+		this.projets = projets;
+	}
+
+
 
 	
 	

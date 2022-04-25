@@ -10,15 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Statut {
+public class SituationEtude {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String statut;
-	private String statut_ar;
+	private String situation;
+	private String situation_ar;
 	
-	@OneToMany(mappedBy = "statut")
+	@OneToMany(mappedBy = "situationEtude")
 	private Collection<Projet> projets;
 	public int getId() {
 		return id;
@@ -26,27 +26,27 @@ public class Statut {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getStatut() {
-		return statut;
-	}
-	public void setStatut(String statut) {
-		this.statut = statut;
-	}
 	
-	public String getStatut_ar() {
-		return statut_ar;
-	}
-	public void setStatut_ar(String statut_ar) {
-		this.statut_ar = statut_ar;
-	}
-	public Statut() {
+	public SituationEtude() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Statut(String statut, String statut_ar) {
+	public SituationEtude(String situation, String situation_ar) {
 		super();
-		this.statut = statut;
-		this.statut_ar = statut_ar;
+		this.situation = situation;
+		this.situation_ar = situation_ar;
+	}
+	public String getSituation() {
+		return situation;
+	}
+	public void setSituation(String situation) {
+		this.situation = situation;
+	}
+	public String getSituation_ar() {
+		return situation_ar;
+	}
+	public void setSituation_ar(String situation_ar) {
+		this.situation_ar = situation_ar;
 	}
 	public Collection<Projet> getProjets() {
 		return projets;
