@@ -12,6 +12,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Province {
 
@@ -23,6 +25,7 @@ public class Province {
 	private String province_ar;
 	
 	@OneToMany(mappedBy = "province")
+	@JsonIgnore
 	private Collection<Commune> communes;
 	
 

@@ -53,6 +53,8 @@ public class CommuneController {
 		
 		return communeRepository.findAllByOrderById();
 	}
+	
+
 	@GetMapping(value = "/provinces1")
 	public List<ProvincePrejection> listProvinces(){
 		

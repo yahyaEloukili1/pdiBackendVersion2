@@ -28,6 +28,8 @@ public class Commune {
 	private String commune;
 	private String commune_ar;
 	
+	
+
 	@ManyToOne()
 	 @JoinColumn(name="province_id")
 	private Province province;

@@ -18,6 +18,8 @@ import javax.persistence.OneToMany;
 
 import org.springframework.data.rest.core.annotation.RestResource;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Projet {
 
@@ -30,6 +32,7 @@ public class Projet {
 	private String location;
 	private Long cout;
 	private int delai;
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date dateLancement;
 	
 	@ManyToOne
@@ -59,6 +62,10 @@ public class Projet {
 	@ManyToOne
 	 @JoinColumn(name="axe_id")
 	private Axe axe;
+	
+	@ManyToOne
+	 @JoinColumn(name="secteur_id")
+	private Secteur secteur;
 	@ManyToOne
 	 @JoinColumn(name="commune_id")
 	private Commune commune;
@@ -214,6 +221,12 @@ public class Projet {
 	}
 	public void setSituationEtude(SituationEtude situationEtude) {
 		this.situationEtude = situationEtude;
+	}
+	public Secteur getSecteur() {
+		return secteur;
+	}
+	public void setSecteur(Secteur secteur) {
+		this.secteur = secteur;
 	}
 	
 	

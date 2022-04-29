@@ -1,11 +1,14 @@
 package com.dsic.pdi.entities;
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Secteur {
@@ -21,7 +24,8 @@ public class Secteur {
 	 @JoinColumn(name="axe_id")
 	private Axe axe;
 	
-
+	@OneToMany(mappedBy = "secteur")
+	private Collection<Projet> projets;
 	public Secteur(String secteur, String secteur_ar, Axe axe) {
 		super();
 		this.secteur = secteur;
@@ -64,6 +68,14 @@ public class Secteur {
 
 	public void setAxe(Axe axe) {
 		this.axe = axe;
+	}
+
+	public Collection<Projet> getProjets() {
+		return projets;
+	}
+
+	public void setProjets(Collection<Projet> projets) {
+		this.projets = projets;
 	}
 	
 	
