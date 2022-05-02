@@ -8,9 +8,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.hateoas.config.HypermediaMappingInformation;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.dsic.pdi.dao.AxeRepository;
 import com.dsic.pdi.dao.CommuneRepository;
@@ -20,6 +22,8 @@ import com.dsic.pdi.dao.ProvinceRepository;
 import com.dsic.pdi.dao.SituationEtudeRepository;
 import com.dsic.pdi.dao.StatutRepository;
 import com.dsic.pdi.dao.TauxAvancementRepository;
+import com.dsic.pdi.entities.AppRole;
+import com.dsic.pdi.entities.AppUser;
 import com.dsic.pdi.entities.Axe;
 import com.dsic.pdi.entities.Commune;
 import com.dsic.pdi.entities.MaitreOuvrage;
@@ -30,11 +34,19 @@ import com.dsic.pdi.entities.Secteur;
 import com.dsic.pdi.entities.SituationEtude;
 import com.dsic.pdi.entities.Statut;
 import com.dsic.pdi.entities.TauxAvancement;
+import com.dsic.pdi.services.AccountService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootApplication
 public class PdiApplication implements CommandLineRunner{
-
+	
+	@Autowired
+	@Lazy
+	private AccountService accountService;
+	@Bean
+	public BCryptPasswordEncoder getBPE() {
+		return new BCryptPasswordEncoder();
+	}
 	@Autowired
 	private CommuneRepository communeRepository;
 	@Autowired
@@ -173,7 +185,11 @@ public class PdiApplication implements CommandLineRunner{
 			tauxAvancementRepository.save(tauxAvancement13);
 		}
 		
-		
+		//accountService.save(new AppUser(null,"adminPdi","Laayoune2022@",null,null));
+		//accountService.saveRole(new AppRole(null,"ADMIN"));
+		//accountService.saveRole(new AppRole(null,"USER"));
+		//accountService.addRoleToUser("adminPdi","ADMIN");
+		//accountService.addRoleToUser("adminPdi","USER");
 		
 			
 	}
