@@ -50,7 +50,7 @@ public class JWTAuthorizationFilter  extends OncePerRequestFilter {
 		  response.addHeader("Access-Control-Allow-Origin", "*");
 	        response.addHeader("Access-Control-Allow-Headers","Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Methods, Access-Control-Request-Headers, Authorization");                                                          
 	        response.addHeader("Access-Control-Expose-Headers", "Access-Control-Allow-Origin, Access-Control-Allow-Credentials, Authorization ");
-	        response.addHeader("Access-Control-Allow-Methods","Get, Post, Put, Delete, Patch, Options");
+	        response.addHeader("Access-Control-Allow-Methods","GET, POST, PUT, DELETE, PATCH, OPTIONS");
 		
 		
 		String jwt = request.getHeader(SecurityConstants.HEADER_STRING);

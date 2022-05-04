@@ -1,5 +1,6 @@
 package com.dsic.pdi.entities;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -27,12 +28,13 @@ public class Projet {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	
 	private String projet;
 	private String projet_ar;
 	private String location;
 	private Long cout;
 	private int delai;
-	@JsonFormat(pattern="dd/MM/yyyy")
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date dateLancement;
 	
 	@ManyToOne

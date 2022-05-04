@@ -1,9 +1,12 @@
 package com.dsic.pdi.web;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,13 +32,17 @@ import com.dsic.pdi.entities.SituationEtudePrejection;
 import com.dsic.pdi.entities.StatutPrejection;
 import com.dsic.pdi.entities.TauxAvancement;
 import com.dsic.pdi.entities.TauxAvancementPrejection;
+import com.dsic.pdi.services.ReportService;
 
 import net.bytebuddy.asm.Advice.OffsetMapping.Sort;
+import net.sf.jasperreports.engine.JRException;
+
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class CommuneController {
-
+@Autowired
+private ReportService reportService;
 	@Autowired
 	private CommuneRepository communeRepository;
 	@Autowired
@@ -118,5 +125,24 @@ public class CommuneController {
 		
 		 communeRepository.deleteById(id);
 	}
-	
+	@GetMapping("/report/{format}")
+	public String generateReport(@PathVariable String format) throws JRException, IOException  {
+		return reportService.exportReport(format);
+	}
+	@GetMapping("/reportMo/{format}")
+	public String generateReport2(@PathVariable String format) throws JRException, IOException  {
+		return reportService.exportReport2(format);
+	}
+	@GetMapping("/reportCommune/{format}")
+	public String generateReportCommune(@PathVariable String format) throws JRException, IOException  {
+		return reportService.exportReportCommune(format);
+	}
+	@GetMapping("/reportStatut/{format}")
+	public String generateReportStatut(@PathVariable String format) throws JRException, IOException  {
+		return reportService.exportReportStatut(format);
+	}
+	@GetMapping("/reportAxe/{format}")
+	public String generateReportAxe(@PathVariable String format) throws JRException, IOException  {
+		return reportService.exportReportAxe(format);
+	}
 }
