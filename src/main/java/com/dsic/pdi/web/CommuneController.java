@@ -127,22 +127,22 @@ private ReportService reportService;
 	}
 	@GetMapping("/report/{format}")
 	public String generateReport(@PathVariable String format) throws JRException, IOException  {
-		return reportService.exportReport(format);
+		return reportService.exportReport(format,"C:\\allProjects.jrxml","\\allProjects.pdf");
 	}
 	@GetMapping("/reportMo/{format}")
 	public String generateReport2(@PathVariable String format) throws JRException, IOException  {
-		return reportService.exportReport2(format);
+		return reportService.exportReportByGroup(format,"C:\\projetsParMo.jrxml","\\projetsMo.pdf","maitreOuvrage");
 	}
 	@GetMapping("/reportCommune/{format}")
 	public String generateReportCommune(@PathVariable String format) throws JRException, IOException  {
-		return reportService.exportReportCommune(format);
+		return reportService.exportReportByGroup(format,"C:\\projetsParCommune.jrxml","\\projetsCommune.pdf","commune");
 	}
 	@GetMapping("/reportStatut/{format}")
 	public String generateReportStatut(@PathVariable String format) throws JRException, IOException  {
-		return reportService.exportReportStatut(format);
+		return  reportService.exportReportByGroup(format,"C:\\projetsParStatut.jrxml","\\projetsStatut.pdf","statut");
 	}
 	@GetMapping("/reportAxe/{format}")
 	public String generateReportAxe(@PathVariable String format) throws JRException, IOException  {
-		return reportService.exportReportAxe(format);
+		return  reportService.exportReportByGroup(format,"C:\\projetsParAxe.jrxml","\\projetsAxe.pdf","axe");
 	}
 }

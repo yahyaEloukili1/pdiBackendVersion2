@@ -26,7 +26,6 @@ public class SpringSecurity extends  WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		//http.formLogin();
 		http.authorizeRequests().antMatchers("/**").permitAll();
 		http.authorizeRequests().anyRequest().authenticated();
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager()));

@@ -57,7 +57,7 @@
 			</rectangle>
 			<image>
 				<reportElement x="40" y="0" width="90" height="75" uuid="4729417a-3601-43e7-932b-9b80d99737c1"/>
-				<imageExpression><![CDATA["C:/Users/yahya/OneDrive/Bureau/morocco.png"]]></imageExpression>
+				<imageExpression><![CDATA["C:\\mi.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="140" y="17" width="140" height="50" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="bf4531be-34d6-40fd-8e08-9266230c9599"/>

@@ -1,6 +1,7 @@
 package com.dsic.pdi.services;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -35,15 +36,29 @@ public class ReportService {
 	private ProjetRepository projetRepository;
 	@Autowired
 	private ResourceLoader resourceLoader;
-	public String exportReport(String reportFormat) throws JRException, IOException {
-		//Sort.by(Sort.Direction.DESC, "province"
+	public String exportReport(String reportFormat,String fileInput,String fileOutput) throws JRException, IOException {
 		List<Projet> projets = projetRepository.findAll();
-		String path = "C:\\Users\\yahya\\Downloads\\report";
-		//File file =ResourceUtils.getFile("claasspath:projets.jrxml");
-	
-		final org.springframework.core.io.Resource fileResource = resourceLoader.getResource("classpath:allProjects.jrxml");
-		File file = fileResource.getFile();
-		JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+		String path = "C:\\report";
+	//"C:\\allProjects.jrxml")
+		JasperReport jasperReport = JasperCompileManager.compileReport(new FileInputStream(fileInput));
+
+		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(projets);
+		Map<String, Object> map = new HashMap<>();
+		map.put("CreatdBy", "Java techi");
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map,dataSource);
+		
+		 if(reportFormat.equalsIgnoreCase("pdf")){
+			// "\\allProjects.pdf"
+			JasperExportManager.exportReportToPdfFile(jasperPrint,path+fileOutput);
+		}
+		return "";
+	}
+
+	public String exportReportByGroup(String reportFormat,String fileInput,String fileOutput,String group) throws JRException, IOException {
+		List<Projet> projets = projetRepository.findAll(Sort.by(Sort.Direction.DESC, group));
+		String path = "C:\\report";
+
+		JasperReport jasperReport = JasperCompileManager.compileReport(new FileInputStream(fileInput));
 
 		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(projets);
 		Map<String, Object> map = new HashMap<>();
@@ -52,98 +67,12 @@ public class ReportService {
 		
 		 if(reportFormat.equalsIgnoreCase("pdf")){
 			
-			JasperExportManager.exportReportToPdfFile(jasperPrint,path+"\\projets4.pdf");
+			JasperExportManager.exportReportToPdfFile(jasperPrint,path+fileOutput);
 		}
 		return "";
-	}
-
-	public String exportReport2(String reportFormat) throws JRException, IOException {
-		//Sort.by(Sort.Direction.DESC, "province"
-		List<Projet> projets = projetRepository.findAll(Sort.by(Sort.Direction.DESC, "maitreOuvrage"));
-		String path = "C:\\Users\\yahya\\Downloads\\report";
-		//File file =ResourceUtils.getFile("claasspath:projets.jrxml");
-	
-		final org.springframework.core.io.Resource fileResource = resourceLoader.getResource("classpath:projetsParMo.jrxml");
-		File file = fileResource.getFile();
-		JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
-
-		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(projets);
-		Map<String, Object> map = new HashMap<>();
-		map.put("CreatdBy", "Java techi");
-		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map,dataSource);
 		
-		 if(reportFormat.equalsIgnoreCase("pdf")){
-			
-			JasperExportManager.exportReportToPdfFile(jasperPrint,path+"\\projetsMO.pdf");
-		}
-		return "";
 	}
 
-	public String exportReportCommune(String reportFormat) throws JRException, IOException {
-		//Sort.by(Sort.Direction.DESC, "province"
-		List<Projet> projets = projetRepository.findAll(Sort.by(Sort.Direction.DESC, "commune"));
-		String path = "C:\\Users\\yahya\\Downloads\\report";
-		//File file =ResourceUtils.getFile("claasspath:projets.jrxml");
-	
-		final org.springframework.core.io.Resource fileResource = resourceLoader.getResource("classpath:projetsParCommune.jrxml");
-		File file = fileResource.getFile();
-		JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
-
-		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(projets);
-		Map<String, Object> map = new HashMap<>();
-		map.put("CreatdBy", "Java techi");
-		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map,dataSource);
-		
-		 if(reportFormat.equalsIgnoreCase("pdf")){
-			
-			JasperExportManager.exportReportToPdfFile(jasperPrint,path+"\\projetsCommune.pdf");
-		}
-		return "";
-	}
-	public String exportReportStatut(String reportFormat) throws JRException, IOException {
-		//Sort.by(Sort.Direction.DESC, "province"
-		List<Projet> projets = projetRepository.findAll(Sort.by(Sort.Direction.DESC, "statut"));
-		String path = "C:\\Users\\yahya\\Downloads\\report";
-		//File file =ResourceUtils.getFile("claasspath:projets.jrxml");
-	
-		final org.springframework.core.io.Resource fileResource = resourceLoader.getResource("classpath:projetsParStatut.jrxml");
-		File file = fileResource.getFile();
-		JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
-
-		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(projets);
-		Map<String, Object> map = new HashMap<>();
-		map.put("CreatdBy", "Java techi");
-		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map,dataSource);
-		
-		 if(reportFormat.equalsIgnoreCase("pdf")){
-			
-			JasperExportManager.exportReportToPdfFile(jasperPrint,path+"\\projetsStatut.pdf");
-		}
-		return "";
-	}
-	public String exportReportAxe(String reportFormat) throws JRException, IOException {
-		//Sort.by(Sort.Direction.DESC, "province"
-		List<Projet> projets = projetRepository.findAll(Sort.by(Sort.Direction.DESC, "axe"));
-		String path = "C:\\Users\\yahya\\Downloads\\report";
-		//File file =ResourceUtils.getFile("claasspath:projets.jrxml");
-	
-		final org.springframework.core.io.Resource fileResource = resourceLoader.getResource("classpath:projetsParAxe.jrxml");
-		File file = fileResource.getFile();
-		JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
-
-		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(projets);
-		Map<String, Object> map = new HashMap<>();
-		map.put("CreatdBy", "Java techi");
-		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map,dataSource);
-		
-		 if(reportFormat.equalsIgnoreCase("pdf")){
-			 LocalDateTime current = LocalDateTime.now();
-			 DateTimeFormatter format = DateTimeFormatter.ofPattern("ddMMyyyyHHmmss");
-			 String formatedDateTime = current.format(format);
-			JasperExportManager.exportReportToPdfFile(jasperPrint,path+"\\projetsAxe_"+formatedDateTime+".pdf");
-		}
-		return "";
-	}
 
 
 }
